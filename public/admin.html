@@ -4,23 +4,48 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Cold Experience CMS</title>
-  <meta http-equiv="refresh" content="0; url=/admin/" />
-  <link rel="canonical" href="/admin/" />
+  <meta name="robots" content="noindex" />
   <style>
-    html, body { height: 100%; margin: 0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; display: grid; place-items: center; color: #111; background: #f9fafb; }
-    .msg { text-align: center; max-width: 320px; line-height: 1.4; }
+    /* Enkel centrerad splash tills CMS:et laddar */
+    html, body { height: 100%; margin: 0; }
+    .center {
+      display: grid;
+      place-items: center;
+      height: 100%;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color: #222;
+      background: #f9fafb;
+    }
+    .btn {
+      display: inline-block; padding: 10px 14px; border-radius: 8px;
+      background: #1f2937; color: #fff; text-decoration: none; font-weight: 600;
+      box-shadow: 0 2px 6px rgba(0,0,0,.12);
+    }
   </style>
+
+  <script>
+    (function normalizeRoute() {
+      var path = window.location.pathname;
+      if (path !== "/admin/" && path !== "/admin") {
+        window.history.replaceState({}, "", "/admin/");
+      }
+    })();
+  </script>
+
+  <!-- Netlify Identity widget (måste laddas före Decap CMS) -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
+  <!-- Decap CMS -->
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 </head>
 <body>
-  <div class="msg">
-    <p>Loading Cold Experience CMS…</p>
-    <p><a href="/admin/">Continue to the editor</a></p>
+  <div class="center">
+    <div>
+      <h1 style="text-align:center;margin:0 0 16px">Decap</h1>
+      <a id="loginBtn" class="btn" href="#">Login with Netlify Identity</a>
+    </div>
   </div>
-  <script>
-    // Säkerställ att vi hamnar på SPA-entrén även om meta-refresh blockeras.
-    if (window.location.pathname !== "/admin/") {
-      window.location.replace("/admin/");
-    }
-  </script>
+
+  <script src="/admin/bootstrap.js"></script>
 </body>
 </html>
