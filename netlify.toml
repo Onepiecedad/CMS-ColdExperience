@@ -1,36 +1,36 @@
 # Netlify configuration for Cold Experience Headless CMS
 [build]
-  command = "echo 'CMS ready to deploy'"
   publish = "public"
+  command = "npm run build"
 
 [[redirects]]
-  from = "/config.yml"
-  to = "/config.yml"
+  from = "/content/*"
+  to = "/content/:splat"
   status = 200
   force = true
 
 [[redirects]]
-  from = "/media/*"
-  to = "/media/:splat"
+  from = "/i18n/*"
+  to = "/i18n/:splat"
   status = 200
   force = true
 
 [[redirects]]
-  from = "/admin/config.yml"
-  to = "/admin/config.yml"
+  from = "/admin/*"
+  to = "/admin/index.html"
   status = 200
-  force = true
 
-[[redirects]]
-  from = "/admin/media/*"
-  to = "/admin/media/:splat"
-  status = 200
-  force = true
+[[headers]]
+  for = "/content/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Content-Type = "application/json"
 
-[[redirects]]
-  from = "/*"
-  to = "/admin.html"
-  status = 200
+[[headers]]
+  for = "/i18n/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Content-Type = "application/json"
 
 # Disable caching for CMS assets
 [[headers]]

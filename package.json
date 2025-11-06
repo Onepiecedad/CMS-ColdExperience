@@ -1,0 +1,13 @@
+{
+  "name": "coldexperience-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "pull:cms": "node scripts/pull-cms.mjs",
+    "build": "npm run pull:cms && npx @11ty/eleventy",
+    "dev": "npm run pull:cms && npx @11ty/eleventy --serve --watch"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0"
+  }
+}
