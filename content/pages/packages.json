@@ -1,0 +1,90 @@
+{
+  "title": "Lapland Holiday Packages",
+  "description": "Choose the perfect package for your Arctic adventure",
+  "packages": [
+    {
+      "key": "complete",
+      "title": "Complete Lapland Experience",
+      "summary": "The ultimate Lapland adventure with all activities included",
+      "description": "Experience everything Lapland has to offer: snowmobile tours, Northern Lights hunting, dog sledding, sauna, and authentic local cuisine.",
+      "priceFrom": 2250,
+      "duration": "3 days / 2 nights",
+      "image": "/media/package-complete.jpg",
+      "featured": true,
+      "includes": [
+        "Snowmobile tours",
+        "Northern Lights viewing",
+        "Dog sledding",
+        "Accommodation",
+        "All meals",
+        "Sauna & hot tub"
+      ],
+      "notIncluded": [
+        "Travel to Lapland",
+        "Travel insurance"
+      ]
+    },
+    {
+      "key": "adventure",
+      "title": "Adventure Package",
+      "summary": "Action-packed snowmobile and dog sledding experience",
+      "description": "Focus on outdoor adventures with snowmobile tours and dog sledding, plus accommodation and meals.",
+      "priceFrom": 1750,
+      "duration": "2 days / 1 night",
+      "image": "/media/package-adventure.jpg",
+      "featured": false,
+      "includes": [
+        "Snowmobile tours",
+        "Dog sledding",
+        "Accommodation",
+        "All meals"
+      ],
+      "notIncluded": [
+        "Northern Lights viewing",
+        "Travel insurance"
+      ]
+    },
+    {
+      "key": "threeDay",
+      "title": "Three-Day Explorer",
+      "summary": "Flexible package to explore Lapland at your own pace",
+      "description": "Three days to experience Lapland's highlights with flexibility to choose your activities.",
+      "priceFrom": 1250,
+      "duration": "3 days / 2 nights",
+      "image": "/media/package-explorer.jpg",
+      "featured": false,
+      "includes": [
+        "Accommodation",
+        "Breakfast & dinner",
+        "Activity options"
+      ],
+      "notIncluded": [
+        "Lunch",
+        "Activities not selected"
+      ]
+    },
+    {
+      "key": "taster",
+      "title": "Taster Experience",
+      "summary": "Perfect introduction to Lapland",
+      "description": "A short but memorable introduction to Lapland with a guided snowmobile tour and local lunch.",
+      "priceFrom": 350,
+      "duration": "Half day",
+      "image": "/media/package-taster.jpg",
+      "featured": false,
+      "includes": [
+        "Snowmobile tour",
+        "Local lunch",
+        "Safety gear"
+      ],
+      "notIncluded": [
+        "Accommodation",
+        "Other activities"
+      ]
+    }
+  ],
+  "seo": {
+    "title": "Lapland Holiday Packages | Cold Experience",
+    "description": "Choose from our range of Lapland packages: Complete Experience, Adventure, Explorer, or Taster. All include authentic activities and local hospitality."
+  }
+}

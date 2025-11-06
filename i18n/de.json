@@ -1,0 +1,39 @@
+{
+  "common": {
+    "appName": "ColdExperience",
+    "language": "Deutsch",
+    "home": "Startseite",
+    "experiences": "Erlebnisse",
+    "faq": "Häufig gestellte Fragen",
+    "contact": "Kontakt"
+  },
+  "home": {
+    "hero": {
+      "title": "Willkommen bei ColdExperience",
+      "subtitle": "Erkunden Sie die intensivsten Kaltwassererlebnisse in der nordischen Region",
+      "ctaText": "Erlebnisse erkunden",
+      "ctaHref": "/experiences"
+    },
+    "about": {
+      "title": "Über ColdExperience",
+      "description": "Wir bieten einzigartige und transformative Kaltwassererlebnisse für Abenteurer und Wellness-Enthusiasten."
+    }
+  },
+  "experiences": {
+    "title": "Unsere Erlebnisse",
+    "description": "Wählen Sie aus unserem Angebot an Kaltwassererlebnissen",
+    "priceFrom": "Ab",
+    "duration": "Dauer",
+    "season": "Jahreszeit",
+    "bookNow": "Jetzt buchen"
+  },
+  "faq": {
+    "title": "Häufig gestellte Fragen",
+    "description": "Antworten auf häufig gestellte Fragen zu unseren Erlebnissen"
+  },
+  "footer": {
+    "copyright": "© 2024 ColdExperience. Alle Rechte vorbehalten.",
+    "privacy": "Datenschutzrichtlinie",
+    "terms": "Nutzungsbedingungen"
+  }
+}

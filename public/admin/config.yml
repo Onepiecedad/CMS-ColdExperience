@@ -1,0 +1,56 @@
+backend:
+  name: github
+  repo: Onepiecedad/ColdExperience
+  branch: main
+
+media_folder: "public/media"
+public_folder: "/media"
+
+collections:
+  - name: "home"
+    label: "Home Page"
+    files:
+      - file: "content/pages/home.json"
+        label: "Home"
+        name: "home"
+        fields:
+          - {label: "Hero Title", name: "hero.title", widget: "string"}
+          - {label: "Hero Subtitle", name: "hero.subtitle", widget: "string"}
+          - {label: "Hero Image", name: "hero.image", widget: "image"}
+          - {label: "Hero Video", name: "hero.videoUrl", widget: "file"}
+          - {label: "CTA Text", name: "hero.ctaText", widget: "string"}
+          - {label: "CTA Link", name: "hero.ctaHref", widget: "string"}
+
+  - name: "experiences"
+    label: "Experiences"
+    folder: "content/experiences"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Slug", name: "slug", widget: "string"}
+      - {label: "Summary", name: "summary", widget: "text"}
+      - {label: "Price From (SEK)", name: "priceFrom", widget: "number", valueType: "int"}
+      - {label: "Duration", name: "duration", widget: "string"}
+      - {label: "Season", name: "season", widget: "list"}
+      - label: "Gallery"
+        name: "gallery"
+        widget: "list"
+        field:
+          label: "Image"
+          name: "image"
+          widget: "image"
+          media_library:
+            config:
+              multiple: true
+              max_file_size: 10
+
+  - name: "faq"
+    label: "FAQ"
+    folder: "content/faq"
+    create: true
+    slug: "{{slug}}"
+    format: "frontmatter"
+    fields:
+      - {label: "Question", name: "title", widget: "string"}
+      - {label: "Answer", name: "body", widget: "markdown"}

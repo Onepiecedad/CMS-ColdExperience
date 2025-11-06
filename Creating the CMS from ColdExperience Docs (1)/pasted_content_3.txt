@@ -1,0 +1,143 @@
+Yes — proceed. Please deliver all three extras + a few additions:
+
+Create example JSON files for ALL sections (one per page/collection), with realistic placeholder content.
+
+Paths:
+
+/content/site.json
+/content/pages/home.json
+/content/pages/about.json
+/content/pages/packages.json
+/content/pages/gallery.json
+/content/pages/contact.json
+/content/faq/example.md
+/content/blog/example-post.md
+/content/experiences/aurora-hunt.json
+/content/experiences/snowmobile.json
+/content/experiences/dog-sled.json
+/content/experiences/accommodation.json
+/i18n/sv.json  (master)
+/i18n/en.json
+/i18n/de.json
+/i18n/pl.json
+/i18n/glossary.csv
+
+
+Include minimal SEO blocks per page:
+seo: { "title": "...", "description": "..." }
+
+Include media fields (hero.image / hero.video / gallery[]).
+
+Use key-based copy inside JSON (e.g., home.hero.title present in sv.json).
+
+Add a small React helper (hook + loader) to read JSON (TypeScript):
+
+src/lib/cms.ts
+
+export async function loadJSON<T=unknown>(path: string): Promise<T> {
+  const res = await fetch(path, { cache: 'no-store' });
+  if (!res.ok) throw new Error(`Failed to load ${path}`);
+  return res.json() as Promise<T>;
+}
+export const localePath = (file: string, lang: string) =>
+  `/i18n/${lang}.json`;
+
+
+src/hooks/useI18n.ts
+
+import { useEffect, useState } from 'react';
+export function useI18n(lang: 'sv'|'en'|'de'|'pl'='sv') {
+  const [t, setT] = useState<Record<string,string>>({});
+  useEffect(() => {
+    fetch(`/i18n/${lang}.json`).then(r=>r.json()).then(setT);
+  }, [lang]);
+  const get = (key: string, fallback = '') =>
+    t[key] ?? fallback;
+  return { t: get };
+}
+
+
+Example usage in Home:
+
+const { t } = useI18n(lang);
+<h1>{t('home.hero.title')}</h1>
+<p>{t('home.hero.subtitle')}</p>
+
+
+src/lib/content.ts (per-page data)
+
+export const contentPath = (name: string, lang: string) =>
+  `/content/pages/${name}.json`;
+
+
+Provide an n8n workflow template for auto-translation (export JSON + README):
+
+Trigger: GitHub Webhook on push filtering i18n/sv.json.
+
+Steps:
+
+Get sv.json (before/after)
+
+Code node: diff keys (changed/added)
+
+Read /i18n/glossary.csv
+
+DeepL/OpenAI translate to en,de,pl (protect {placeholders} and ICU)
+
+Update en.json, de.json, pl.json (only touched keys)
+
+Commit back with message auto-translate: <keys>
+
+(Optional) Slack/Email notify
+
+Env/Secrets doc:
+
+DEEPL_API_KEY / OPENAI_API_KEY
+DEFAULT_SOURCE_LANG=sv
+TARGET_LANGS=en,de,pl
+GITHUB_TOKEN
+
+
+Add TypeScript types + schema validation (Zod) for main collections:
+
+src/types/content.ts for HomePage, Experience, SiteConfig.
+
+Zod validate at load-time to fail fast if editors make mistakes.
+
+Fallback & safety
+
+If a key is missing in en/de/pl, fall back to sv.
+
+Preserve placeholders {name}, {count}, %s during translation.
+
+Testing checklist (please run and confirm):
+
+ Editing sv.json updates EN/DE/PL via n8n within 1–2 min
+
+ Home/Experiences/About/FAQ/Contact read from /content JSON/MD
+
+ Hero image upload via CMS → appears live
+
+ SEO fields render to <head>
+
+ Missing translation falls back to SV
+
+ Glossary terms applied consistently
+
+Docs
+
+Update FULL_SITE_INTEGRATION.md with:
+
+Paths above, hook usage, example components
+
+n8n env & deployment steps (Netlify Identity/Git Gateway or Vercel+GitHub OAuth-proxy)
+
+Add EDITOR_QUICK_START.md (1-page: login → edit → save → live).
+
+Summary:
+
+✅ Yes, create example JSON files, a React hook/loader, and an n8n auto-translation template.
+
+✅ Include TS types, Zod validation, glossary handling, fallback logic, and a test checklist.
+
+✅ Confirm end-to-end works on all pages/sections and all four languages.

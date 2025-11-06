@@ -1,0 +1,29 @@
+{
+  "title": "Contact Us",
+  "description": "Get in touch with Cold Experience to plan your Lapland adventure",
+  "contact": {
+    "email": "info@coldexperience.se",
+    "phone": "+46 (0)123 456 789",
+    "address": "Råstrand, Lapland, Sweden",
+    "mapLocation": "Råstrand, Sweden"
+  },
+  "form": {
+    "title": "Send us a message",
+    "description": "Fill out the form below and we'll get back to you within 24 hours.",
+    "submitButton": "Send Message"
+  },
+  "hours": {
+    "title": "Business Hours",
+    "monday": "09:00 - 17:00",
+    "tuesday": "09:00 - 17:00",
+    "wednesday": "09:00 - 17:00",
+    "thursday": "09:00 - 17:00",
+    "friday": "09:00 - 17:00",
+    "saturday": "10:00 - 16:00",
+    "sunday": "Closed"
+  },
+  "seo": {
+    "title": "Contact Cold Experience | Get in Touch",
+    "description": "Contact Cold Experience to book your Lapland adventure. Email, phone, or use our contact form."
+  }
+}

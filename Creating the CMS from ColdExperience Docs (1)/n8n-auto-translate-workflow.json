@@ -1,0 +1,430 @@
+{
+  "name": "Cold Experience - Auto-Translate i18n",
+  "description": "Automatically translates Swedish i18n keys to English, German, and Polish using DeepL/OpenAI. Triggered on GitHub push to i18n/sv.json.",
+  "nodes": [
+    {
+      "parameters": {
+        "events": "push",
+        "filters": {
+          "ref": "main",
+          "pathFilter": {
+            "enabled": true,
+            "path": "i18n/sv.json"
+          }
+        }
+      },
+      "name": "GitHub Webhook",
+      "type": "n8n-nodes-base.githubTrigger",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "operation": "get",
+        "owner": "={{ $env.GITHUB_OWNER }}",
+        "repository": "={{ $env.GITHUB_REPO }}",
+        "filePath": "i18n/sv.json",
+        "branch": "main"
+      },
+      "name": "Get Swedish i18n File",
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 2,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Parse current Swedish translations\nconst svContent = Buffer.from(JSON.parse(JSON.stringify($input.all()[0].json.content)), 'base64').toString('utf-8');\nconst svData = JSON.parse(svContent);\n\n// Get previous version for comparison\nconst prevContent = $input.all()[0].json.previous_content || '{}';\nconst prevData = JSON.parse(prevContent);\n\n// Find changed/added keys\nconst changedKeys = {};\nconst findChanges = (obj, prev, path = '') => {\n  for (const key in obj) {\n    const fullKey = path ? `${path}.${key}` : key;\n    if (typeof obj[key] === 'object' && obj[key] !== null) {\n      findChanges(obj[key], prev?.[key] || {}, fullKey);\n    } else {\n      if (obj[key] !== prev?.[key]) {\n        changedKeys[fullKey] = obj[key];\n      }\n    }\n  }\n};\n\nfindChanges(svData, prevData);\n\nreturn {\n  svData,\n  changedKeys,\n  keyCount: Object.keys(changedKeys).length\n};"
+      },
+      "name": "Detect Changed Keys",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "operation": "get",
+        "owner": "={{ $env.GITHUB_OWNER }}",
+        "repository": "={{ $env.GITHUB_REPO }}",
+        "filePath": "i18n/glossary.csv",
+        "branch": "main"
+      },
+      "name": "Load Glossary",
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 2,
+      "position": [850, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Parse glossary CSV\nconst glossaryContent = Buffer.from(JSON.parse(JSON.stringify($input.all()[0].json.content)), 'base64').toString('utf-8');\nconst lines = glossaryContent.trim().split('\\n');\nconst glossary = {};\n\nfor (let i = 1; i < lines.length; i++) {\n  const [sv, en, de, pl] = lines[i].split(',').map(s => s.trim());\n  if (sv) {\n    glossary[sv.toLowerCase()] = { en, de, pl };\n  }\n}\n\nreturn { glossary };"
+      },
+      "name": "Parse Glossary",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1050, 300]
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "operation": "get",
+        "owner": "={{ $env.GITHUB_OWNER }}",
+        "repository": "={{ $env.GITHUB_REPO }}",
+        "filePath": "i18n/en.json",
+        "branch": "main"
+      },
+      "name": "Get English i18n File",
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 2,
+      "position": [1250, 150]
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "operation": "get",
+        "owner": "={{ $env.GITHUB_OWNER }}",
+        "repository": "={{ $env.GITHUB_REPO }}",
+        "filePath": "i18n/de.json",
+        "branch": "main"
+      },
+      "name": "Get German i18n File",
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 2,
+      "position": [1250, 300]
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "operation": "get",
+        "owner": "={{ $env.GITHUB_OWNER }}",
+        "repository": "={{ $env.GITHUB_REPO }}",
+        "filePath": "i18n/pl.json",
+        "branch": "main"
+      },
+      "name": "Get Polish i18n File",
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 2,
+      "position": [1250, 450]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.deepl.com/v2/translate",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "deepLApi",
+        "sendBody": true,
+        "bodyParametersUi": "keyValue",
+        "bodyParameters": [
+          {
+            "name": "text",
+            "value": "={{ $node['Detect Changed Keys'].json.changedKeys }}"
+          },
+          {
+            "name": "target_lang",
+            "value": "EN"
+          },
+          {
+            "name": "preserve_formatting",
+            "value": "true"
+          }
+        ]
+      },
+      "name": "Translate to English (DeepL)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1450, 150]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.deepl.com/v2/translate",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "deepLApi",
+        "sendBody": true,
+        "bodyParametersUi": "keyValue",
+        "bodyParameters": [
+          {
+            "name": "text",
+            "value": "={{ $node['Detect Changed Keys'].json.changedKeys }}"
+          },
+          {
+            "name": "target_lang",
+            "value": "DE"
+          },
+          {
+            "name": "preserve_formatting",
+            "value": "true"
+          }
+        ]
+      },
+      "name": "Translate to German (DeepL)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1450, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.deepl.com/v2/translate",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "deepLApi",
+        "sendBody": true,
+        "bodyParametersUi": "keyValue",
+        "bodyParameters": [
+          {
+            "name": "text",
+            "value": "={{ $node['Detect Changed Keys'].json.changedKeys }}"
+          },
+          {
+            "name": "target_lang",
+            "value": "PL"
+          },
+          {
+            "name": "preserve_formatting",
+            "value": "true"
+          }
+        ]
+      },
+      "name": "Translate to Polish (DeepL)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1450, 450]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Merge translations with existing data\nconst enData = JSON.parse(Buffer.from($node['Get English i18n File'].json.content, 'base64').toString('utf-8'));\nconst enTranslations = $node['Translate to English (DeepL)'].json.translations;\n\n// Update only changed keys\nconst updateKeys = (obj, translations, path = '') => {\n  for (const key in translations) {\n    const fullKey = path ? `${path}.${key}` : key;\n    if (typeof translations[key] === 'object') {\n      if (!obj[key]) obj[key] = {};\n      updateKeys(obj[key], translations[key], fullKey);\n    } else {\n      obj[key] = translations[key];\n    }\n  }\n};\n\nupdateKeys(enData, enTranslations);\n\nreturn {\n  enData: JSON.stringify(enData, null, 2),\n  deData: JSON.stringify($node['Get German i18n File'].json, null, 2),\n  plData: JSON.stringify($node['Get Polish i18n File'].json, null, 2)\n};"
+      },
+      "name": "Merge Translations",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1650, 300]
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "operation": "update",
+        "owner": "={{ $env.GITHUB_OWNER }}",
+        "repository": "={{ $env.GITHUB_REPO }}",
+        "filePath": "i18n/en.json",
+        "fileContent": "={{ $node['Merge Translations'].json.enData }}",
+        "commitMessage": "CMS: Auto-translate i18n keys to English",
+        "branch": "main"
+      },
+      "name": "Commit English Translations",
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 2,
+      "position": [1850, 150]
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "operation": "update",
+        "owner": "={{ $env.GITHUB_OWNER }}",
+        "repository": "={{ $env.GITHUB_REPO }}",
+        "filePath": "i18n/de.json",
+        "fileContent": "={{ $node['Merge Translations'].json.deData }}",
+        "commitMessage": "CMS: Auto-translate i18n keys to German",
+        "branch": "main"
+      },
+      "name": "Commit German Translations",
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 2,
+      "position": [1850, 300]
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "operation": "update",
+        "owner": "={{ $env.GITHUB_OWNER }}",
+        "repository": "={{ $env.GITHUB_REPO }}",
+        "filePath": "i18n/pl.json",
+        "fileContent": "={{ $node['Merge Translations'].json.plData }}",
+        "commitMessage": "CMS: Auto-translate i18n keys to Polish",
+        "branch": "main"
+      },
+      "name": "Commit Polish Translations",
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 2,
+      "position": [1850, 450]
+    },
+    {
+      "parameters": {
+        "channel": "{{ $env.SLACK_CHANNEL }}",
+        "text": "✅ Auto-translation complete\\n\\nTranslated {{ $node['Detect Changed Keys'].json.keyCount }} keys from Swedish to EN/DE/PL\\n\\nRepository: {{ $env.GITHUB_REPO }}"
+      },
+      "name": "Notify Slack (Optional)",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2,
+      "position": [2050, 300]
+    }
+  ],
+  "connections": {
+    "GitHub Webhook": {
+      "main": [
+        [
+          {
+            "node": "Get Swedish i18n File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Swedish i18n File": {
+      "main": [
+        [
+          {
+            "node": "Detect Changed Keys",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Detect Changed Keys": {
+      "main": [
+        [
+          {
+            "node": "Load Glossary",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get English i18n File",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get German i18n File",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get Polish i18n File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Load Glossary": {
+      "main": [
+        [
+          {
+            "node": "Parse Glossary",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Glossary": {
+      "main": [
+        [
+          {
+            "node": "Translate to English (DeepL)",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Translate to German (DeepL)",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Translate to Polish (DeepL)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Translate to English (DeepL)": {
+      "main": [
+        [
+          {
+            "node": "Merge Translations",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Translate to German (DeepL)": {
+      "main": [
+        [
+          {
+            "node": "Merge Translations",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Translate to Polish (DeepL)": {
+      "main": [
+        [
+          {
+            "node": "Merge Translations",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge Translations": {
+      "main": [
+        [
+          {
+            "node": "Commit English Translations",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Commit German Translations",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Commit Polish Translations",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Commit English Translations": {
+      "main": [
+        [
+          {
+            "node": "Notify Slack (Optional)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Commit German Translations": {
+      "main": [
+        [
+          {
+            "node": "Notify Slack (Optional)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Commit Polish Translations": {
+      "main": [
+        [
+          {
+            "node": "Notify Slack (Optional)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}

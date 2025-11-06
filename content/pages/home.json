@@ -1,0 +1,32 @@
+{
+  "hero": {
+    "title": "Välkommen till ColdExperience",
+    "subtitle": "Utforska de mest intensiva kalla vattenupplevelserna i Norden",
+    "image": "/media/hero-image.jpg",
+    "videoUrl": "/media/hero-video.mp4",
+    "ctaText": "Utforska upplevelser",
+    "ctaHref": "/experiences"
+  },
+  "about": {
+    "title": "Om ColdExperience",
+    "description": "Vi erbjuder unika och transformativa kalla vattenupplevelser för äventyrare och wellness-entusiaster.",
+    "image": "/media/about-image.jpg"
+  },
+  "features": [
+    {
+      "title": "Autentiska upplevelser",
+      "description": "Äkta kalla vattenupplevelser i naturliga miljöer",
+      "icon": "snowflake"
+    },
+    {
+      "title": "Expertledning",
+      "description": "Erfarna instruktörer säkerställer din säkerhet och komfort",
+      "icon": "users"
+    },
+    {
+      "title": "Wellness fokus",
+      "description": "Hälsa och välbefinnande i centrum för varje upplevelse",
+      "icon": "heart"
+    }
+  ]
+}

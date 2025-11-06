@@ -1,0 +1,44 @@
+{
+  "title": "About Cold Experience",
+  "description": "We grew up in this environment and to us it is everyday life. We want more people to experience these magical winters and feel the calm that comes from being out in the Arctic cold.",
+  "team": {
+    "title": "Meet your Lapland hosts",
+    "description": "Welcome to Lapland where imagination becomes reality.",
+    "members": [
+      {
+        "name": "Gustav",
+        "role": "Founder & Guide",
+        "bio": "Raised in Råstrand, has driven snowmobiles since age two. Over 100,000 km of snowmobile experience and deep local knowledge.",
+        "image": "/media/gustav.jpg"
+      },
+      {
+        "name": "Julia",
+        "role": "Hospitality & Food",
+        "bio": "Extensive experience running top restaurants, including ski resorts in Norway. Expert in food and hospitality.",
+        "image": "/media/julia.jpg"
+      }
+    ]
+  },
+  "mission": {
+    "title": "Why we created Cold Experience",
+    "description": "We wanted to combine the west coast and Lapland in our lives and find a way to live in both places. Together we created Cold Experience to share exciting snowmobile safaris, magical northern lights tours, and genuine dog sledding adventures."
+  },
+  "values": [
+    {
+      "title": "Local expertise",
+      "description": "Born and raised in Råstrand"
+    },
+    {
+      "title": "Family business",
+      "description": "Personal service for every guest"
+    },
+    {
+      "title": "Authentic experience",
+      "description": "True Lapland lifestyle"
+    }
+  ],
+  "seo": {
+    "title": "About Cold Experience | Meet Gustav & Julia",
+    "description": "Learn about Cold Experience founders Gustav and Julia, their passion for Lapland, and the authentic experiences they offer."
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "title": "Ice Plunge Experience",
+  "slug": "ice-plunge",
+  "summary": "A thrilling introduction to cold water immersion in controlled conditions",
+  "description": "Experience the invigorating sensation of controlled ice plunge in our specially prepared facilities. Perfect for beginners looking to explore the benefits of cold water therapy.",
+  "priceFrom": 499,
+  "duration": "1 hour",
+  "season": ["Winter", "Spring"],
+  "difficulty": "Beginner",
+  "gallery": [
+    "/media/ice-plunge-1.jpg",
+    "/media/ice-plunge-2.jpg"
+  ],
+  "featured": true
+}

@@ -1,0 +1,17 @@
+{
+  "title": "Cold Experience",
+  "description": "Experience the magic of Lapland with authentic winter adventures, snowmobile tours, and Northern Lights viewing.",
+  "url": "https://coldexperience.se",
+  "contactEmail": "info@coldexperience.se",
+  "contactPhone": "+46 (0)123 456 789",
+  "contactAddress": "Råstrand, Lapland, Sweden",
+  "social": {
+    "facebook": "https://facebook.com/coldexperience",
+    "instagram": "https://instagram.com/coldexperience",
+    "linkedin": "https://linkedin.com/company/coldexperience"
+  },
+  "seo": {
+    "title": "Cold Experience Lapland | Authentic Arctic Holidays",
+    "description": "Experience the magic of Lapland with snowmobile tours, Northern Lights viewing, dog sledding, and authentic Swedish Lapland experiences in the cleanest air in Europe."
+  }
+}

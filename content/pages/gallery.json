@@ -1,0 +1,40 @@
+{
+  "title": "Gallery",
+  "description": "Explore the magic of Lapland through our photo gallery",
+  "images": [
+    {
+      "image": "/media/gallery-1.jpg",
+      "caption": "Snowmobile adventure under the stars",
+      "category": "Snowmobile"
+    },
+    {
+      "image": "/media/gallery-2.jpg",
+      "caption": "Northern Lights dancing above Lapland",
+      "category": "Aurora"
+    },
+    {
+      "image": "/media/gallery-3.jpg",
+      "caption": "Dog sledding through winter forest",
+      "category": "Dog Sledding"
+    },
+    {
+      "image": "/media/gallery-4.jpg",
+      "caption": "Warm sauna and hot tub experience",
+      "category": "Accommodation"
+    },
+    {
+      "image": "/media/gallery-5.jpg",
+      "caption": "Traditional Lapland cuisine",
+      "category": "Food"
+    },
+    {
+      "image": "/media/gallery-6.jpg",
+      "caption": "Winter landscape at sunset",
+      "category": "Nature"
+    }
+  ],
+  "seo": {
+    "title": "Gallery | Cold Experience Lapland",
+    "description": "Explore stunning photos of Lapland adventures, Northern Lights, snowmobiles, dog sledding, and authentic Lapland experiences."
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "common": {
+    "appName": "ColdExperience",
+    "language": "Svenska",
+    "home": "Hem",
+    "experiences": "Upplevelser",
+    "faq": "Vanliga frågor",
+    "contact": "Kontakt"
+  },
+  "home": {
+    "hero": {
+      "title": "Välkommen till ColdExperience",
+      "subtitle": "Utforska de mest intensiva kalla vattenupplevelserna i Norden",
+      "ctaText": "Utforska upplevelser",
+      "ctaHref": "/experiences"
+    },
+    "about": {
+      "title": "Om ColdExperience",
+      "description": "Vi erbjuder unika och transformativa kalla vattenupplevelser för äventyrare och wellness-entusiaster."
+    }
+  },
+  "experiences": {
+    "title": "Våra upplevelser",
+    "description": "Välj från vårt utbud av kalla vattenupplevelser",
+    "priceFrom": "Från",
+    "duration": "Varaktighet",
+    "season": "Säsong",
+    "bookNow": "Boka nu"
+  },
+  "faq": {
+    "title": "Vanliga frågor",
+    "description": "Svar på vanliga frågor om våra upplevelser"
+  },
+  "footer": {
+    "copyright": "© 2024 ColdExperience. Alla rättigheter förbehållna.",
+    "privacy": "Integritetspolicy",
+    "terms": "Användarvillkor"
+  }
+}

@@ -1,0 +1,99 @@
+Keep the new headless CMS — do not restore the old CMS project.
+Please focus on integrating the new CMS with the existing React site.
+
+Integration requirements:
+
+The React app must read all content directly from the JSON files stored in the repo (no external API).
+
+No separate dev-server or runtime is needed.
+
+The CMS handles content editing, versioning, and deployment only (Git-first workflow).
+
+The existing auto-translation workflow (n8n + GitHub push) must remain active and update EN/DE/PL automatically whenever Swedish changes.
+
+Once integrated:
+
+The live site must build using the CMS-managed content files.
+
+All pages and sections (Home, Experiences, About, FAQ, Contact, Gallery, etc.) must pull their data from the CMS structure.
+
+✅ Please make sure the CMS covers all existing pages and sections currently live on www.coldexperience.se
+ — not just the homepage.
+
+The CMS must allow editing of all text, images, and structured content for every page in all four languages (SV, EN, DE, PL).
+
+Pages & Collections to include
+
+Global Settings (content/site.json)
+Navigation, footer, social links, contact info, global SEO.
+
+Home (content/pages/home.json)
+Hero (title, subtitle, CTA, video/image), highlights, featured experiences.
+
+Experiences (content/experiences/*.json)
+Each experience (snowmobile, aurora hunt, dog sled, accommodation, etc.):
+title, summary, long description, gallery, priceFrom, duration, season, itinerary[], includes[], notIncluded[], SEO metadata.
+
+About (content/pages/about.json)
+Title, description, team section, image/video.
+
+Packages (content/pages/packages.json)
+Optional: list of package offers (title, summary, price, CTA).
+
+Gallery (content/pages/gallery.json)
+Image list + optional captions or categories.
+
+FAQ (content/faq/*.md)
+Question + answer in markdown.
+
+Contact (content/pages/contact.json)
+Title, description, phone, email, address, map location, CTA.
+
+Blog / News (content/blog/*.md)
+Optional for future use — title, date, body, featured image.
+
+Behavior & Localization
+
+Every page/collection must exist in all four languages (SV/EN/DE/PL).
+
+Swedish (sv.json) acts as master for auto-translation via n8n (DeepL/OpenAI).
+
+Translation automation updates en.json, de.json, and pl.json automatically when Swedish content changes.
+
+Maintain a consistent key-based structure (home.hero.title, faq.q1.title, etc.).
+
+Technical Setup
+
+Continue using Decap CMS (Git-based, not API-based).
+
+CMS hosted on https://coldexperience.se/admin
+ (preferred)
+or on admin.coldexperience.se if Git Gateway is already configured.
+
+All content written to JSON/MD files inside the repo:
+/content/, /i18n/, /public/media/.
+
+Site rebuilds automatically via Vercel on commit.
+
+Images uploaded in CMS → saved to /public/media/.
+
+Deliverables / Updates Requested
+
+Extend the current CMS config (config.yml) to include all pages and sections above.
+
+Ensure all multilingual i18n files (sv/en/de/pl) are connected.
+
+Keep the existing Git-first workflow (no external database).
+
+Keep all existing documents (README.md, INTEGRATION_GUIDE.md, etc.) but update them to reflect the full-site scope.
+
+Keep the auto-translation pipeline and glossary integration intact.
+
+Once updated, confirm:
+
+✅ All pages from www.coldexperience.se
+ are editable in CMS.
+
+✅ All content lives as JSON/MD files under /content.
+
+✅ Build & deploy cycle still works end-to-end.

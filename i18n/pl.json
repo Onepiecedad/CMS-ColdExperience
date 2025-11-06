@@ -1,0 +1,39 @@
+{
+  "common": {
+    "appName": "ColdExperience",
+    "language": "Polski",
+    "home": "Strona główna",
+    "experiences": "Doświadczenia",
+    "faq": "Często zadawane pytania",
+    "contact": "Kontakt"
+  },
+  "home": {
+    "hero": {
+      "title": "Witaj w ColdExperience",
+      "subtitle": "Odkryj najintensywniejsze doświadczenia w zimnej wodzie w regionie nordyckim",
+      "ctaText": "Odkryj doświadczenia",
+      "ctaHref": "/experiences"
+    },
+    "about": {
+      "title": "O ColdExperience",
+      "description": "Oferujemy unikalne i transformacyjne doświadczenia w zimnej wodzie dla poszukiwaczy przygód i entuzjastów wellness."
+    }
+  },
+  "experiences": {
+    "title": "Nasze doświadczenia",
+    "description": "Wybierz z naszej oferty doświadczeń w zimnej wodzie",
+    "priceFrom": "Od",
+    "duration": "Czas trwania",
+    "season": "Sezon",
+    "bookNow": "Zarezerwuj teraz"
+  },
+  "faq": {
+    "title": "Często zadawane pytania",
+    "description": "Odpowiedzi na częste pytania dotyczące naszych doświadczeń"
+  },
+  "footer": {
+    "copyright": "© 2024 ColdExperience. Wszystkie prawa zastrzeżone.",
+    "privacy": "Polityka prywatności",
+    "terms": "Warunki korzystania z usługi"
+  }
+}

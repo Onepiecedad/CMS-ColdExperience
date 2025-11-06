@@ -1,0 +1,16 @@
+{
+  "title": "Arctic Swim Adventure",
+  "slug": "arctic-swim",
+  "summary": "An advanced cold water swimming experience in pristine Nordic waters",
+  "description": "Join our expert guides for an unforgettable Arctic swimming adventure. This experience combines physical challenge with the stunning beauty of Nordic landscapes.",
+  "priceFrom": 899,
+  "duration": "3 hours",
+  "season": ["Winter", "Spring", "Fall"],
+  "difficulty": "Advanced",
+  "gallery": [
+    "/media/arctic-swim-1.jpg",
+    "/media/arctic-swim-2.jpg",
+    "/media/arctic-swim-3.jpg"
+  ],
+  "featured": true
+}

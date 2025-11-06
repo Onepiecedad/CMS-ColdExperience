@@ -1,0 +1,154 @@
+Lokaler (sv)
+
+frontend/public/locales/sv/about.json
+frontend/public/locales/sv/common.json
+frontend/public/locales/sv/contact.json
+frontend/public/locales/sv/experiences.json
+frontend/public/locales/sv/features.json
+frontend/public/locales/sv/footer.json
+frontend/public/locales/sv/gallery.json
+frontend/public/locales/sv/header.json
+frontend/public/locales/sv/hero.json
+frontend/public/locales/sv/home.json
+frontend/public/locales/sv/homeCorner.json
+frontend/public/locales/sv/ownerSection.json
+frontend/public/locales/sv/packages.json
+frontend/public/locales/sv/pages.json
+frontend/public/locales/sv/testimonials.json
+frontend/public/locales/sv/translation.json
+frontend/public/locales/sv/why.json
+(Övriga språk—en, de, pl—har parallella filuppsättningar. frontend/public/locales/translation.template.json ligger som mall.)
+
+JS-konfigdata
+
+frontend/src/data/packagesConfig.js
+frontend/src/data/packageFallbacks.js (tom placeholder i nuläget)
+// frontend/src/data/packagesConfig.js
+const packagesConfig = [
+  {
+    key: "complete",
+    price: 2250,
+    image:
+      "https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?auto=format&fit=crop&w=1200&q=80",
+    gradient: "hero",
+    theme: "premium",
+    featured: true,
+    order: 0,
+  },
+  {
+    key: "adventure",
+    price: 1750,
+    image:
+      "https://images.unsplash.com/photo-1507272931001-fc06c17e4f43?auto=format&fit=crop&w=1200&q=80",
+    gradient: "heroSolid",
+    theme: "brand",
+    order: 1,
+  },
+  {
+    key: "threeDay",
+    price: 1250,
+    image:
+      "https://images.unsplash.com/photo-1454496522488-7a8e488e8606?auto=format&fit=crop&w=1200&q=80",
+    gradient: "hero",
+    theme: "brand",
+    order: 2,
+  },
+  {
+    key: "taster",
+    price: 350,
+    image:
+      "https://images.unsplash.com/photo-1705946985442-512875aaa310?auto=format&fit=crop&w=1200&q=80",
+    gradient: "heroSolid",
+    theme: "brand",
+    order: 3,
+  },
+];
+
+export const PACKAGE_KEYS = packagesConfig.map((pkg) => pkg.key);
+
+export default packagesConfig;
+// frontend/src/data/packageFallbacks.js
+Build-konfiguration (Netlify)
+
+# frontend/netlify.toml
+[build]
+  command = "npm run build"
+  publish = "build"
+
+[functions]
+  directory = "netlify/functions"
+
+[build.processing]
+  skip_processing = false
+
+[build.processing.css]
+  bundle = true
+  minify = true
+
+[build.processing.js]
+  bundle = true
+  minify = true
+
+[build.processing.html]
+  pretty_urls = true
+
+[build.processing.images]
+  compress = true
+
+[dev]
+  command = "npm start"
+  port = 3000
+
+[build.environment]
+  REACT_APP_API_URL = "https://coldexperience.onrender.com"
+  REACT_APP_SITE_URL = "https://coldexperience.se"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/en/packages"
+  to = "/en/lapland-holiday-packages"
+  status = 301
+
+[[redirects]]
+  from = "/sv/packages"
+  to = "/sv/paketresor"
+  status = 301
+
+[[redirects]]
+  from = "/de/packages"
+  to = "/de/lappland-reisepakete"
+  status = 301
+
+[context.deploy-preview]
+  [[headers]]
+    for = "/*"
+    [headers.values]
+      X-Robots-Tag = "noindex, nofollow"
+
+[context.branch-deploy]
+  [[headers]]
+    for = "/*"
+    [headers.values]
+      X-Robots-Tag = "noindex, nofollow"
+
+[context.production.environment]
+  REACT_APP_SITE_URL = "https://coldexperience.se"
+
+[[headers]]
+  for = "/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/manifest.webmanifest"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"

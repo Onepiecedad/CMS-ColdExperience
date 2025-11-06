@@ -1,0 +1,15 @@
+{
+  "title": "Dog Sledding Adventure",
+  "slug": "dog-sledding",
+  "summary": "Drive your own dog sled team through snow-covered wilderness and experience the bond between musher and huskies.",
+  "description": "Experience the ancient art of dog sledding with our friendly husky teams. You'll learn to handle the sled, command the dogs, and navigate through beautiful winter forests. This is an unforgettable experience that connects you with Lapland's traditional culture.",
+  "priceFrom": 650,
+  "duration": "Half day (4 hours)",
+  "season": "Winter",
+  "difficulty": "Intermediate",
+  "featured": true,
+  "featuredImage": "/media/dogsled-hero.jpg",
+  "gallery": [
+    {
+      "image": "/media/dogsled-1.jpg",
+      "caption": "Dog sled team ready for adventure"\n    },\n    {\n      \"image\": \"/media/dogsled-2.jpg\",\n      \"caption\": \"Mushing through winter forest\"\n    },\n    {\n      \"image\": \"/media/dogsled-3.jpg\",\n      \"caption\": \"Bonding with the husky team\"\n    }\n  ],\n  \"itinerary\": [\n    {\n      \"time\": \"10:00\",\n      \"activity\": \"Pickup & Meet the Dogs\",\n      \"description\": \"We pick you up and introduce you to your husky team.\"\n    },\n    {\n      \"time\": \"10:30\",\n      \"activity\": \"Training\",\n      \"description\": \"Learn how to handle the sled, command the dogs, and navigate safely.\"\n    },\n    {\n      \"time\": \"11:00\",\n      \"activity\": \"Dog Sledding\",\n      \"description\": \"Drive your own sled team through beautiful winter landscapes for 2-3 hours.\"\n    },\n    {\n      \"time\": \"14:00\",\n      \"activity\": \"Fika & Return\",\n      \"description\": \"Warm fika (Swedish coffee break) with the dogs before returning to base.\"\n    }\n  ],\n  \"includes\": [\n    \"Dog sled team rental\",\n    \"Professional mushing instruction\",\n    \"Warm clothing (thermal suits, boots, gloves)\",\n    \"Fika with traditional Swedish treats\",\n    \"Time with the husky team\",\n    \"Transportation from accommodation\"\n  ],\n  \"notIncluded\": [\n    \"Accommodation\",\n    \"Meals\",\n    \"Travel insurance\",\n    \"Photography services\"\n  ],\n  \"requirements\": [\n    \"Minimum age: 12 years\",\n    \"Reasonable fitness level\",\n    \"Warm clothing (we provide most gear)\",\n    \"No fear of dogs\"\n  ],\n  \"seo\": {\n    \"title\": \"Dog Sledding in Lapland | Husky Adventures\",\n    \"description\": \"Experience authentic dog sledding in Lapland with friendly husky teams. Professional instruction and unforgettable Arctic adventure.\"\n  }\n}
