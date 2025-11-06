@@ -1,0 +1,21 @@
+[build]
+  publish = "public"
+  # no build command (static CMS)
+
+# Always serve the admin SPA entry for any /admin path
+[[redirects]]
+  from = "/admin/*"
+  to = "/admin/index.html"
+  status = 200
+
+# Optional: send the site root to admin (handy if nothing else is published)
+# [[redirects]]
+#   from = "/*"
+#   to = "/admin/index.html"
+#   status = 200
+
+# Prevent caching of admin assets/pages
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    Cache-Control = "no-store, no-cache, must-revalidate, max-age=0"

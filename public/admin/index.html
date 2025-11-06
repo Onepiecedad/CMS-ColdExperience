@@ -1,25 +1,96 @@
 <!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="noindex" />
-    <title>Cold Experience CMS</title>
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-  </head>
-  <body>
-    <!-- Include the script that builds the page and powers Decap CMS -->
-    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-    <script>
-      if (window.netlifyIdentity) {
-        window.netlifyIdentity.on("init", user => {
-          if (!user) {
-            window.netlifyIdentity.loginWithExternalProvider("github", {
-              scope: "public_repo,repo"
-            });
-          }
-        });
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>Cold Experience CMS</title>
+
+  <!-- Netlify Identity widget (måste laddas före Decap CMS) -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
+  <!-- Decap CMS -->
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+
+  <style>
+    /* Enkel centrerad splash tills CMS:et laddar */
+    html, body { height: 100%; margin: 0; }
+    .center {
+      display: grid;
+      place-items: center;
+      height: 100%;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color: #222;
+    }
+    .btn {
+      display: inline-block; padding: 10px 14px; border-radius: 8px;
+      background: #1f2937; color: #fff; text-decoration: none; font-weight: 600;
+      box-shadow: 0 2px 6px rgba(0,0,0,.12);
+    }
+  </style>
+</head>
+<body>
+  <div class="center">
+    <div>
+      <h1 style="text-align:center;margin:0 0 16px">Decap</h1>
+      <a id="loginBtn" class="btn" href="#">Login with Netlify Identity</a>
+    </div>
+  </div>
+
+  <script>
+    /**
+     * 1) Om Netlify skickar återställnings- eller bekräftelse-länk med query (?recovery_token=…)
+     *    – skicka vidare till Decap-route så formuläret visas inne i /admin/.
+     */
+    (function handleIdentityRecoveryRedirect() {
+      var qs = window.location.search || "";
+      if (/recovery_token=/.test(qs) || /invite_token=/.test(qs) || /confirmation_token=/.test(qs)) {
+        var dest = "/admin/#/recover-password" + qs;
+        if (window.location.pathname !== "/admin/" || !/\/admin\/#\/recover-password/.test(window.location.href)) {
+          window.location.replace(dest);
+        }
       }
-    </script>
-  </body>
+    })();
+
+    /**
+     * 2) Initiera Netlify Identity korrekt för git-gateway.
+     *    Använder .open() (popup) – INTE den borttagna loginWithExternalProvider().
+     */
+    (function initIdentity() {
+      var loginBtn = document.getElementById("loginBtn");
+
+      function ensureOpen() {
+        try { window.netlifyIdentity && window.netlifyIdentity.open(); } catch(e) {}
+      }
+
+      if (window.netlifyIdentity) {
+        // Öppna automatisk om ingen användare
+        window.netlifyIdentity.on("init", function (user) {
+          if (!user) ensureOpen();
+        });
+
+        // Efter login → ladda om till /admin/ (Decap renderar då CMS:et)
+        window.netlifyIdentity.on("login", function () {
+          window.location.href = "/admin/";
+        });
+
+        // Även knappen öppnar login
+        loginBtn.addEventListener("click", function (e) {
+          e.preventDefault();
+          ensureOpen();
+        });
+
+        // Starta init (triggas implicit av widgeten, men säkrar att UI dyker upp)
+        // Om widget redan hunnit initieras finns window.netlifyIdentity.currentUser()
+        setTimeout(function () {
+          if (!window.netlifyIdentity.currentUser()) ensureOpen();
+        }, 200);
+      } else {
+        // Om widgeten inte laddades (nätverk o.s.v.)
+        loginBtn.textContent = "Netlify Identity failed to load";
+        loginBtn.style.opacity = "0.6";
+      }
+    })();
+  </script>
+</body>
 </html>
