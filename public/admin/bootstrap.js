@@ -3,7 +3,7 @@
 
   normalizeAdminPath();
   handleIdentityRecoveryRedirect();
-  initIdentity();
+  waitForIdentity(wireIdentity);
 
   function normalizeAdminPath() {
     var path = window.location.pathname;
@@ -11,11 +11,12 @@
 
     var search = window.location.search || "";
     var hash = window.location.hash || "";
+    var target = "/admin/" + (search || "") + (hash || "");
 
     if (path === "/admin") {
-      window.history.replaceState({}, "", "/admin/" + search + hash);
+      window.history.replaceState({}, "", target);
     } else {
-      window.history.replaceState({}, "", "/admin/" + search + hash);
+      window.history.replaceState({}, "", target);
     }
   }
 
@@ -26,8 +27,7 @@
       /^#\/recover-password/.test(window.location.hash || "");
 
     if (tokenQuery && !alreadyRecovering) {
-      var dest = "/admin/#/recover-password" + tokenQuery;
-      window.location.replace(dest);
+      window.location.replace("/admin/#/recover-password" + tokenQuery);
     }
   }
 
@@ -61,88 +61,74 @@
     return "";
   }
 
-  function initIdentity() {
+  function waitForIdentity(cb) {
+    if (window.netlifyIdentity) {
+      cb(window.netlifyIdentity);
+      return;
+    }
+
+    document.addEventListener("DOMContentLoaded", function onReady() {
+      document.removeEventListener("DOMContentLoaded", onReady);
+      if (window.netlifyIdentity) {
+        cb(window.netlifyIdentity);
+      }
+    });
+  }
+
+  function wireIdentity(identity) {
+    if (!identity) return;
+
     var loginBtn = document.getElementById("loginBtn");
-    var wired = false;
-
-    function attemptWire() {
-      var identity = window.netlifyIdentity;
-      if (!identity) {
-        setTimeout(attemptWire, 50);
-        return;
-      }
-
-      if (wired) return;
-      wired = true;
-
-      if (loginBtn) {
-        loginBtn.addEventListener("click", function (e) {
-          e.preventDefault();
-          openLogin(identity);
-        });
-      }
-
-      identity.on("init", function (user) {
-        if (user) {
-          markCmsReady();
-          ensureCmsRoute();
-        } else {
-          openLogin(identity);
-        }
+    if (loginBtn) {
+      loginBtn.addEventListener("click", function (event) {
+        event.preventDefault();
+        openLogin(identity);
       });
+    }
 
-      identity.on("login", function () {
-        markCmsReady();
+    identity.on("init", function (user) {
+      if (user) {
+        showCms(identity);
+      } else {
+        setTimeout(function () { openLogin(identity); }, 150);
+      }
+    });
+
+    identity.on("login", function () {
+      showCms(identity);
+      window.location.replace("/admin/#/");
+    });
+
+    identity.on("logout", function () {
+      document.body.classList.remove("cms-ready");
+      window.location.replace("/admin/");
+    });
+
+    if (typeof identity.init === "function") {
+      identity.init();
+    }
+
+    if (identity.currentUser()) {
+      showCms(identity);
+    }
+  }
+
+  function openLogin(identity) {
+    try {
+      identity.open("login");
+    } catch (e) {
+      /* no-op */
+    }
+  }
+
+  function showCms(identity) {
+    document.body.classList.add("cms-ready");
+    try {
+      if (identity && typeof identity.close === "function") {
         identity.close();
-        ensureCmsRoute(true);
-      });
-
-      identity.on("logout", function () {
-        document.body.classList.remove("cms-ready");
-        identity.close();
-        window.location.replace("/admin/");
-      });
-
-      if (identity.currentUser()) {
-        markCmsReady();
-        ensureCmsRoute();
       }
-
-      if (typeof identity.init === "function") {
-        identity.init();
-      }
-    }
-
-    attemptWire();
-
-    function openLogin(identity) {
-      try {
-        identity.open("login");
-      } catch (e) {
-        /* no-op */
-      }
-    }
-
-    function ensureCmsRoute(force) {
-      var hash = window.location.hash || "";
-      var onRecover = hash.indexOf("#/recover-password") === 0;
-
-      if (!force && onRecover) return;
-
-      if (hash !== "#/" || force) {
-        window.location.replace("/admin/#/");
-      }
-    }
-
-    function markCmsReady() {
-      document.body.classList.add("cms-ready");
-      try {
-        if (window.netlifyIdentity && typeof window.netlifyIdentity.close === "function") {
-          window.netlifyIdentity.close();
-        }
-      } catch (e) {
-        /* no-op */
-      }
+    } catch (e) {
+      /* no-op */
     }
   }
 })();

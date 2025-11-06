@@ -7,11 +7,25 @@
   from = "/config.yml"
   to = "/config.yml"
   status = 200
+  force = true
 
 [[redirects]]
   from = "/media/*"
   to = "/media/:splat"
   status = 200
+  force = true
+
+[[redirects]]
+  from = "/admin/config.yml"
+  to = "/admin/config.yml"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/admin/media/*"
+  to = "/admin/media/:splat"
+  status = 200
+  force = true
 
 [[redirects]]
   from = "/*"
