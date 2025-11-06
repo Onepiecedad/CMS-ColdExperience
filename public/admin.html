@@ -26,8 +26,15 @@
   <script>
     (function normalizeRoute() {
       var path = window.location.pathname;
-      if (path !== "/admin/" && path !== "/admin") {
-        window.history.replaceState({}, "", "/admin/");
+      if (path === "/admin/") return;
+
+      var search = window.location.search || "";
+      var hash = window.location.hash || "";
+
+      if (path === "/admin") {
+        window.history.replaceState({}, "", "/admin/" + search + hash);
+      } else {
+        window.history.replaceState({}, "", "/admin/" + search + hash);
       }
     })();
   </script>

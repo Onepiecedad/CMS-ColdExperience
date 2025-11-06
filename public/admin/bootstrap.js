@@ -1,17 +1,64 @@
 (function () {
   if (typeof window === "undefined") return;
 
+  normalizeAdminPath();
   handleIdentityRecoveryRedirect();
   initIdentity();
 
-  function handleIdentityRecoveryRedirect() {
-    var qs = window.location.search || "";
-    if (/recovery_token=/.test(qs) || /invite_token=/.test(qs) || /confirmation_token=/.test(qs)) {
-      var dest = "/admin/#/recover-password" + qs;
-      if (window.location.pathname !== "/admin/" || !/\/admin\/#\/recover-password/.test(window.location.href)) {
-        window.location.replace(dest);
-      }
+  function normalizeAdminPath() {
+    var path = window.location.pathname;
+    if (path === "/admin/") return;
+
+    var search = window.location.search || "";
+    var hash = window.location.hash || "";
+
+    if (path === "/admin") {
+      window.history.replaceState({}, "", "/admin/" + search + hash);
+    } else {
+      window.history.replaceState({}, "", "/admin/" + search + hash);
     }
+  }
+
+  function handleIdentityRecoveryRedirect() {
+    var tokenQuery = extractTokenQuery();
+    var alreadyRecovering =
+      window.location.pathname === "/admin/" &&
+      /^#\/recover-password/.test(window.location.hash || "");
+
+    if (tokenQuery && !alreadyRecovering) {
+      var dest = "/admin/#/recover-password" + tokenQuery;
+      window.location.replace(dest);
+    }
+  }
+
+  function extractTokenQuery() {
+    var search = window.location.search || "";
+    var hash = window.location.hash || "";
+    var markers = ["recovery_token=", "invite_token=", "confirmation_token="];
+
+    var hasToken = markers.some(function (marker) {
+      return search.indexOf(marker) !== -1 || hash.indexOf(marker) !== -1;
+    });
+
+    if (!hasToken) return "";
+
+    if (markers.some(function (marker) { return search.indexOf(marker) !== -1; })) {
+      return search;
+    }
+
+    if (hash) {
+      var cleaned = hash.replace(/^#\/?/, "");
+      if (cleaned.indexOf("?") !== -1) {
+        cleaned = cleaned.slice(cleaned.indexOf("?"));
+      } else if (cleaned && cleaned.indexOf("=") !== -1) {
+        cleaned = "?" + cleaned;
+      } else {
+        cleaned = "";
+      }
+      return cleaned;
+    }
+
+    return "";
   }
 
   function initIdentity() {
