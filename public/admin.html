@@ -24,6 +24,14 @@
     body.cms-ready .center {
       display: none;
     }
+    #nc-root {
+      display: none;
+      min-height: 100%;
+    }
+    body.cms-ready #nc-root {
+      display: block;
+      min-height: 100%;
+    }
   </style>
 
   <script>
@@ -55,6 +63,8 @@
       <a id="loginBtn" class="btn" href="#">Login with Netlify Identity</a>
     </div>
   </div>
+
+  <div id="nc-root"></div>
 
   <script src="/admin/bootstrap.js"></script>
 </body>
