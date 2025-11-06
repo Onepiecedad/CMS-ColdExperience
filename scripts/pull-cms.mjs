@@ -1,4 +1,5 @@
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { resolve } from "node:path";
 
 const CMS_BASE = process.env.CMS_BASE || "https://cms-coldexperience.netlify.app";
 
@@ -18,10 +19,32 @@ const EXPERIENCE_FILES = [
   "/content/experiences/ice-plunge.json",
 ];
 
+async function loadLocalJSON(path) {
+  const filePath = resolve(path.replace(/^\//, ""));
+  const raw = await readFile(filePath, "utf8");
+  try {
+    return JSON.parse(raw);
+  } catch (err) {
+    const normalized = raw.replace(/\\n/g, "\n").replace(/\\"/g, '"');
+    return JSON.parse(normalized);
+  }
+}
+
 async function fetchJSON(path) {
-  const res = await fetch(CMS_BASE + path, { headers: { "Cache-Control": "no-cache" } });
-  if (!res.ok) throw new Error(`Fetch failed ${res.status} for ${path}`);
-  return res.json();
+  const url = CMS_BASE + path;
+  try {
+    const res = await fetch(url, { headers: { "Cache-Control": "no-cache" } });
+    if (!res.ok) throw new Error(`Fetch failed ${res.status} for ${path}`);
+    const contentType = res.headers.get("content-type") || "";
+    if (!/application\/json/i.test(contentType)) {
+      throw new Error(`Unexpected content-type "${contentType}" for ${path}`);
+    }
+    return res.json();
+  } catch (error) {
+    console.warn(`⚠️  Unable to fetch ${url}: ${error.message}`);
+    console.warn("   Falling back to local repository content.");
+    return loadLocalJSON(path);
+  }
 }
 
 const toKey = (p) => p.split("/").pop().replace(".json", "");

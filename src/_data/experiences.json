@@ -1,0 +1,276 @@
+[
+  {
+    "title": "Schoolhouse Lodging",
+    "slug": "schoolhouse-lodging",
+    "summary": "Stay in our lovingly restored village school with private rooms, wood-fired sauna, and hot tub overlooking the Vindel River.",
+    "description": "Experience authentic Lapland hospitality in our beautifully restored schoolhouse. Located in the heart of Råstrand, our accommodation offers cozy private rooms, traditional wood-fired sauna, and an outdoor hot tub with views of the Vindel River. Enjoy home-cooked meals featuring local ingredients and the warmth of genuine Arctic hospitality.",
+    "priceFrom": 1200,
+    "duration": "Per night",
+    "season": "Year-round",
+    "difficulty": "Beginner",
+    "featured": true,
+    "featuredImage": "/media/schoolhouse-hero.jpg",
+    "gallery": [
+      {
+        "image": "/media/schoolhouse-1.jpg",
+        "caption": "Exterior of the restored schoolhouse"
+      },
+      {
+        "image": "/media/schoolhouse-2.jpg",
+        "caption": "Cozy bedroom with loft"
+      },
+      {
+        "image": "/media/schoolhouse-3.jpg",
+        "caption": "Hot tub with river view"
+      },
+      {
+        "image": "/media/schoolhouse-4.jpg",
+        "caption": "Wood-fired sauna"
+      }
+    ],
+    "amenities": [
+      "Private room with loft and lounge area",
+      "Shared kitchen facilities",
+      "Wood-fired sauna",
+      "Outdoor hot tub",
+      "River views",
+      "Heating",
+      "Wi-Fi",
+      "Parking"
+    ],
+    "itinerary": [
+      {
+        "time": "15:00",
+        "activity": "Check-in",
+        "description": "Arrive and settle into your private room. Meet Gustav & Julia."
+      },
+      {
+        "time": "18:00",
+        "activity": "Dinner",
+        "description": "Enjoy home-cooked dinner featuring local Lapland ingredients."
+      },
+      {
+        "time": "20:00",
+        "activity": "Sauna & Hot Tub",
+        "description": "Relax in the wood-fired sauna and outdoor hot tub under the stars."
+      },
+      {
+        "time": "08:00",
+        "activity": "Breakfast",
+        "description": "Wake up to a hearty Lapland breakfast."
+      },
+      {
+        "time": "11:00",
+        "activity": "Check-out",
+        "description": "Depart with memories of authentic Arctic hospitality."
+      }
+    ],
+    "includes": [
+      "Private room with loft",
+      "Breakfast and dinner",
+      "Sauna access",
+      "Hot tub access",
+      "Wi-Fi",
+      "Parking"
+    ],
+    "notIncluded": [
+      "Activities (booked separately)",
+      "Lunch",
+      "Travel insurance",
+      "Alcoholic beverages"
+    ],
+    "house_rules": [
+      "Check-in: 3:00 PM",
+      "Check-out: 11:00 AM",
+      "No smoking inside",
+      "Quiet hours: 10:00 PM - 8:00 AM",
+      "Pets: By arrangement"
+    ],
+    "seo": {
+      "title": "Schoolhouse Lodging in Lapland | Authentic Arctic Accommodation",
+      "description": "Stay in our restored schoolhouse in Råstrand, Lapland. Private rooms, sauna, hot tub, and home-cooked meals with authentic Arctic hospitality."
+    }
+  },
+  {
+    "title": "Arctic Swim Adventure",
+    "slug": "arctic-swim",
+    "summary": "An advanced cold water swimming experience in pristine Nordic waters",
+    "description": "Join our expert guides for an unforgettable Arctic swimming adventure. This experience combines physical challenge with the stunning beauty of Nordic landscapes.",
+    "priceFrom": 899,
+    "duration": "3 hours",
+    "season": [
+      "Winter",
+      "Spring",
+      "Fall"
+    ],
+    "difficulty": "Advanced",
+    "gallery": [
+      "/media/arctic-swim-1.jpg",
+      "/media/arctic-swim-2.jpg",
+      "/media/arctic-swim-3.jpg"
+    ],
+    "featured": true
+  },
+  {
+    "title": "Northern Lights Hunt",
+    "slug": "northern-lights-aurora",
+    "summary": "Witness the magical aurora borealis dancing across the Arctic night sky.",
+    "description": "Experience one of nature's most spectacular phenomena—the Northern Lights. Our expert guides take you to prime viewing locations away from light pollution, where you'll have the best chance of seeing the aurora borealis. Bring your camera and prepare to be amazed.",
+    "priceFrom": 450,
+    "duration": "Evening (4-5 hours)",
+    "season": "Winter",
+    "difficulty": "Beginner",
+    "featured": true,
+    "featuredImage": "/media/aurora-hero.jpg",
+    "gallery": [
+      {
+        "image": "/media/aurora-1.jpg",
+        "caption": "Green aurora dancing above Lapland"
+      },
+      {
+        "image": "/media/aurora-2.jpg",
+        "caption": "Aurora reflected in frozen lake"
+      },
+      {
+        "image": "/media/aurora-3.jpg",
+        "caption": "Group watching the Northern Lights"
+      }
+    ],
+    "itinerary": [
+      {
+        "time": "18:00",
+        "activity": "Pickup & Preparation",
+        "description": "We pick you up and prepare you with warm clothing and hot beverages."
+      },
+      {
+        "time": "19:00",
+        "activity": "Drive to Viewing Location",
+        "description": "Travel to our prime Northern Lights viewing spot away from light pollution."
+      },
+      {
+        "time": "20:00",
+        "activity": "Aurora Hunting",
+        "description": "Watch the sky and wait for the magical aurora borealis to appear. Our guides provide photography tips."
+      },
+      {
+        "time": "23:00",
+        "activity": "Return",
+        "description": "Return to base with unforgettable memories."
+      }
+    ],
+    "includes": [
+      "Expert guide with aurora knowledge",
+      "Warm clothing (thermal suits, boots, gloves)",
+      "Hot beverages and snacks",
+      "Photography guidance",
+      "Transportation",
+      "Sauna access upon return"
+    ],
+    "notIncluded": [
+      "Accommodation",
+      "Meals",
+      "Travel insurance",
+      "Professional camera equipment"
+    ],
+    "requirements": [
+      "Minimum age: 8 years",
+      "Warm clothing (we provide most gear)",
+      "Patience and flexibility (weather dependent)"
+    ],
+    "notes": "Aurora visibility depends on weather and solar activity. We cannot guarantee aurora sightings, but we maximize your chances.",
+    "seo": {
+      "title": "Northern Lights Tours in Lapland | Aurora Hunt",
+      "description": "Hunt for the magical Northern Lights in Lapland. Expert guides, prime viewing locations, and photography tips included."
+    }
+  },
+  {
+    "title": "Dog Sledding Adventure",
+    "slug": "dog-sledding",
+    "summary": "Drive your own dog sled team through snow-covered wilderness and experience the bond between musher and huskies.",
+    "description": "Experience the ancient art of dog sledding with our friendly husky teams. You'll learn to handle the sled, command the dogs, and navigate through beautiful winter forests. This is an unforgettable experience that connects you with Lapland's traditional culture.",
+    "priceFrom": 650,
+    "duration": "Half day (4 hours)",
+    "season": "Winter",
+    "difficulty": "Intermediate",
+    "featured": true,
+    "featuredImage": "/media/dogsled-hero.jpg",
+    "gallery": [
+      {
+        "image": "/media/dogsled-1.jpg",
+        "caption": "Dog sled team ready for adventure"
+      },
+      {
+        "image": "/media/dogsled-2.jpg",
+        "caption": "Mushing through winter forest"
+      },
+      {
+        "image": "/media/dogsled-3.jpg",
+        "caption": "Bonding with the husky team"
+      }
+    ],
+    "itinerary": [
+      {
+        "time": "10:00",
+        "activity": "Pickup & Meet the Dogs",
+        "description": "We pick you up and introduce you to your husky team."
+      },
+      {
+        "time": "10:30",
+        "activity": "Training",
+        "description": "Learn how to handle the sled, command the dogs, and navigate safely."
+      },
+      {
+        "time": "11:00",
+        "activity": "Dog Sledding",
+        "description": "Drive your own sled team through beautiful winter landscapes for 2-3 hours."
+      },
+      {
+        "time": "14:00",
+        "activity": "Fika & Return",
+        "description": "Warm fika (Swedish coffee break) with the dogs before returning to base."
+      }
+    ],
+    "includes": [
+      "Dog sled team rental",
+      "Professional mushing instruction",
+      "Warm clothing (thermal suits, boots, gloves)",
+      "Fika with traditional Swedish treats",
+      "Time with the husky team",
+      "Transportation from accommodation"
+    ],
+    "notIncluded": [
+      "Accommodation",
+      "Meals",
+      "Travel insurance",
+      "Photography services"
+    ],
+    "requirements": [
+      "Minimum age: 12 years",
+      "Reasonable fitness level",
+      "Warm clothing (we provide most gear)",
+      "No fear of dogs"
+    ],
+    "seo": {
+      "title": "Dog Sledding in Lapland | Husky Adventures",
+      "description": "Experience authentic dog sledding in Lapland with friendly husky teams. Professional instruction and unforgettable Arctic adventure."
+    }
+  },
+  {
+    "title": "Ice Plunge Experience",
+    "slug": "ice-plunge",
+    "summary": "A thrilling introduction to cold water immersion in controlled conditions",
+    "description": "Experience the invigorating sensation of controlled ice plunge in our specially prepared facilities. Perfect for beginners looking to explore the benefits of cold water therapy.",
+    "priceFrom": 499,
+    "duration": "1 hour",
+    "season": [
+      "Winter",
+      "Spring"
+    ],
+    "difficulty": "Beginner",
+    "gallery": [
+      "/media/ice-plunge-1.jpg",
+      "/media/ice-plunge-2.jpg"
+    ],
+    "featured": true
+  }
+]

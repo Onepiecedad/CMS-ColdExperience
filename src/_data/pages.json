@@ -1,0 +1,237 @@
+{
+  "home": {
+    "hero": {
+      "title": "Välkommen till ColdExperience",
+      "subtitle": "Utforska de mest intensiva kalla vattenupplevelserna i Norden",
+      "image": "/media/hero-image.jpg",
+      "videoUrl": "/media/hero-video.mp4",
+      "ctaText": "Utforska upplevelser",
+      "ctaHref": "/experiences"
+    },
+    "about": {
+      "title": "Om ColdExperience",
+      "description": "Vi erbjuder unika och transformativa kalla vattenupplevelser för äventyrare och wellness-entusiaster.",
+      "image": "/media/about-image.jpg"
+    },
+    "features": [
+      {
+        "title": "Autentiska upplevelser",
+        "description": "Äkta kalla vattenupplevelser i naturliga miljöer",
+        "icon": "snowflake"
+      },
+      {
+        "title": "Expertledning",
+        "description": "Erfarna instruktörer säkerställer din säkerhet och komfort",
+        "icon": "users"
+      },
+      {
+        "title": "Wellness fokus",
+        "description": "Hälsa och välbefinnande i centrum för varje upplevelse",
+        "icon": "heart"
+      }
+    ]
+  },
+  "about": {
+    "title": "About Cold Experience",
+    "description": "We grew up in this environment and to us it is everyday life. We want more people to experience these magical winters and feel the calm that comes from being out in the Arctic cold.",
+    "team": {
+      "title": "Meet your Lapland hosts",
+      "description": "Welcome to Lapland where imagination becomes reality.",
+      "members": [
+        {
+          "name": "Gustav",
+          "role": "Founder & Guide",
+          "bio": "Raised in Råstrand, has driven snowmobiles since age two. Over 100,000 km of snowmobile experience and deep local knowledge.",
+          "image": "/media/gustav.jpg"
+        },
+        {
+          "name": "Julia",
+          "role": "Hospitality & Food",
+          "bio": "Extensive experience running top restaurants, including ski resorts in Norway. Expert in food and hospitality.",
+          "image": "/media/julia.jpg"
+        }
+      ]
+    },
+    "mission": {
+      "title": "Why we created Cold Experience",
+      "description": "We wanted to combine the west coast and Lapland in our lives and find a way to live in both places. Together we created Cold Experience to share exciting snowmobile safaris, magical northern lights tours, and genuine dog sledding adventures."
+    },
+    "values": [
+      {
+        "title": "Local expertise",
+        "description": "Born and raised in Råstrand"
+      },
+      {
+        "title": "Family business",
+        "description": "Personal service for every guest"
+      },
+      {
+        "title": "Authentic experience",
+        "description": "True Lapland lifestyle"
+      }
+    ],
+    "seo": {
+      "title": "About Cold Experience | Meet Gustav & Julia",
+      "description": "Learn about Cold Experience founders Gustav and Julia, their passion for Lapland, and the authentic experiences they offer."
+    }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "description": "Get in touch with Cold Experience to plan your Lapland adventure",
+    "contact": {
+      "email": "info@coldexperience.se",
+      "phone": "+46 (0)123 456 789",
+      "address": "Råstrand, Lapland, Sweden",
+      "mapLocation": "Råstrand, Sweden"
+    },
+    "form": {
+      "title": "Send us a message",
+      "description": "Fill out the form below and we'll get back to you within 24 hours.",
+      "submitButton": "Send Message"
+    },
+    "hours": {
+      "title": "Business Hours",
+      "monday": "09:00 - 17:00",
+      "tuesday": "09:00 - 17:00",
+      "wednesday": "09:00 - 17:00",
+      "thursday": "09:00 - 17:00",
+      "friday": "09:00 - 17:00",
+      "saturday": "10:00 - 16:00",
+      "sunday": "Closed"
+    },
+    "seo": {
+      "title": "Contact Cold Experience | Get in Touch",
+      "description": "Contact Cold Experience to book your Lapland adventure. Email, phone, or use our contact form."
+    }
+  },
+  "packages": {
+    "title": "Lapland Holiday Packages",
+    "description": "Choose the perfect package for your Arctic adventure",
+    "packages": [
+      {
+        "key": "complete",
+        "title": "Complete Lapland Experience",
+        "summary": "The ultimate Lapland adventure with all activities included",
+        "description": "Experience everything Lapland has to offer: snowmobile tours, Northern Lights hunting, dog sledding, sauna, and authentic local cuisine.",
+        "priceFrom": 2250,
+        "duration": "3 days / 2 nights",
+        "image": "/media/package-complete.jpg",
+        "featured": true,
+        "includes": [
+          "Snowmobile tours",
+          "Northern Lights viewing",
+          "Dog sledding",
+          "Accommodation",
+          "All meals",
+          "Sauna & hot tub"
+        ],
+        "notIncluded": [
+          "Travel to Lapland",
+          "Travel insurance"
+        ]
+      },
+      {
+        "key": "adventure",
+        "title": "Adventure Package",
+        "summary": "Action-packed snowmobile and dog sledding experience",
+        "description": "Focus on outdoor adventures with snowmobile tours and dog sledding, plus accommodation and meals.",
+        "priceFrom": 1750,
+        "duration": "2 days / 1 night",
+        "image": "/media/package-adventure.jpg",
+        "featured": false,
+        "includes": [
+          "Snowmobile tours",
+          "Dog sledding",
+          "Accommodation",
+          "All meals"
+        ],
+        "notIncluded": [
+          "Northern Lights viewing",
+          "Travel insurance"
+        ]
+      },
+      {
+        "key": "threeDay",
+        "title": "Three-Day Explorer",
+        "summary": "Flexible package to explore Lapland at your own pace",
+        "description": "Three days to experience Lapland's highlights with flexibility to choose your activities.",
+        "priceFrom": 1250,
+        "duration": "3 days / 2 nights",
+        "image": "/media/package-explorer.jpg",
+        "featured": false,
+        "includes": [
+          "Accommodation",
+          "Breakfast & dinner",
+          "Activity options"
+        ],
+        "notIncluded": [
+          "Lunch",
+          "Activities not selected"
+        ]
+      },
+      {
+        "key": "taster",
+        "title": "Taster Experience",
+        "summary": "Perfect introduction to Lapland",
+        "description": "A short but memorable introduction to Lapland with a guided snowmobile tour and local lunch.",
+        "priceFrom": 350,
+        "duration": "Half day",
+        "image": "/media/package-taster.jpg",
+        "featured": false,
+        "includes": [
+          "Snowmobile tour",
+          "Local lunch",
+          "Safety gear"
+        ],
+        "notIncluded": [
+          "Accommodation",
+          "Other activities"
+        ]
+      }
+    ],
+    "seo": {
+      "title": "Lapland Holiday Packages | Cold Experience",
+      "description": "Choose from our range of Lapland packages: Complete Experience, Adventure, Explorer, or Taster. All include authentic activities and local hospitality."
+    }
+  },
+  "gallery": {
+    "title": "Gallery",
+    "description": "Explore the magic of Lapland through our photo gallery",
+    "images": [
+      {
+        "image": "/media/gallery-1.jpg",
+        "caption": "Snowmobile adventure under the stars",
+        "category": "Snowmobile"
+      },
+      {
+        "image": "/media/gallery-2.jpg",
+        "caption": "Northern Lights dancing above Lapland",
+        "category": "Aurora"
+      },
+      {
+        "image": "/media/gallery-3.jpg",
+        "caption": "Dog sledding through winter forest",
+        "category": "Dog Sledding"
+      },
+      {
+        "image": "/media/gallery-4.jpg",
+        "caption": "Warm sauna and hot tub experience",
+        "category": "Accommodation"
+      },
+      {
+        "image": "/media/gallery-5.jpg",
+        "caption": "Traditional Lapland cuisine",
+        "category": "Food"
+      },
+      {
+        "image": "/media/gallery-6.jpg",
+        "caption": "Winter landscape at sunset",
+        "category": "Nature"
+      }
+    ],
+    "seo": {
+      "title": "Gallery | Cold Experience Lapland",
+      "description": "Explore stunning photos of Lapland adventures, Northern Lights, snowmobiles, dog sledding, and authentic Lapland experiences."
+    }
+  }
+}
