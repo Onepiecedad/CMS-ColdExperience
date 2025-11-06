@@ -39,7 +39,12 @@ async function fetchJSON(path) {
     if (!/application\/json/i.test(contentType)) {
       throw new Error(`Unexpected content-type "${contentType}" for ${path}`);
     }
-    return res.json();
+    const text = await res.text();
+    try {
+      return JSON.parse(text);
+    } catch (parseErr) {
+      throw new Error(`Invalid JSON payload for ${path}: ${parseErr.message}`);
+    }
   } catch (error) {
     console.warn(`⚠️  Unable to fetch ${url}: ${error.message}`);
     console.warn("   Falling back to local repository content.");
