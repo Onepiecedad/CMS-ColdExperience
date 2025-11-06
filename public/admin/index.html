@@ -60,35 +60,44 @@
       var loginBtn = document.getElementById("loginBtn");
 
       function ensureOpen() {
-        try { window.netlifyIdentity && window.netlifyIdentity.open(); } catch(e) {}
+        try { window.netlifyIdentity && window.netlifyIdentity.open("login"); } catch(e) {}
+      }
+
+      function wireIdentity(identity) {
+        if (!identity) return;
+
+        window.netlifyIdentity?.on("init", function (user) {
+          if (!user) window.netlifyIdentity.open("login");
+        });
+
+        // Efter login/logout → ladda om till /admin/ för att uppdatera Decap
+        ["login", "logout"].forEach(function (evt) {
+          identity.on(evt, function () {
+            window.location.href = "/admin/";
+          });
+        });
+
+        if (loginBtn) {
+          loginBtn.addEventListener("click", function (e) {
+            e.preventDefault();
+            ensureOpen();
+          });
+        }
+
+        // Säkerställ att login-dialogen dyker upp om vi saknar användare
+        setTimeout(function () {
+          if (!identity.currentUser()) ensureOpen();
+        }, 200);
       }
 
       if (window.netlifyIdentity) {
-        // Öppna automatisk om ingen användare
-        window.netlifyIdentity.on("init", function (user) {
-          if (!user) ensureOpen();
-        });
-
-        // Efter login → ladda om till /admin/ (Decap renderar då CMS:et)
-        window.netlifyIdentity.on("login", function () {
-          window.location.href = "/admin/";
-        });
-
-        // Även knappen öppnar login
-        loginBtn.addEventListener("click", function (e) {
-          e.preventDefault();
-          ensureOpen();
-        });
-
-        // Starta init (triggas implicit av widgeten, men säkrar att UI dyker upp)
-        // Om widget redan hunnit initieras finns window.netlifyIdentity.currentUser()
-        setTimeout(function () {
-          if (!window.netlifyIdentity.currentUser()) ensureOpen();
-        }, 200);
+        wireIdentity(window.netlifyIdentity);
       } else {
         // Om widgeten inte laddades (nätverk o.s.v.)
-        loginBtn.textContent = "Netlify Identity failed to load";
-        loginBtn.style.opacity = "0.6";
+        if (loginBtn) {
+          loginBtn.textContent = "Netlify Identity failed to load";
+          loginBtn.style.opacity = "0.6";
+        }
       }
     })();
   </script>

@@ -1,26 +1,23 @@
 # Netlify configuration for Cold Experience Headless CMS
-
 [build]
-  # No build needed – static files only
   command = "echo 'CMS ready to deploy'"
   publish = "public"
 
-# Redirect all /admin requests to the SPA entry (index.html)
 [[redirects]]
-  from = "/admin/*"
-  to = "/admin/index.html"
+  from = "/*"
+  to = "/admin.html"
   status = 200
 
-# Cache configuration (avoid stale CMS content)
+# Disable caching for CMS assets
 [[headers]]
-  for = "/admin/*"
+  for = "/admin.html"
   [headers.values]
-    Cache-Control = "no-cache, no-store, must-revalidate"
+    Cache-Control = "public, max-age=0, must-revalidate"
 
 [[headers]]
   for = "/config.yml"
   [headers.values]
-    Cache-Control = "no-cache, no-store, must-revalidate"
+    Cache-Control = "public, max-age=0, must-revalidate"
 
 # Security headers
 [[headers]]

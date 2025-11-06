@@ -3,17 +3,6 @@
   command = "echo 'CMS ready to deploy'"
   publish = "public"
 
-# Redirect all CMS-related routes to admin.html
-[[redirects]]
-  from = "/admin/*"
-  to = "/admin.html"
-  status = 200
-
-[[redirects]]
-  from = "/.netlify/identity/*"
-  to = "/admin.html"
-  status = 200
-
 [[redirects]]
   from = "/*"
   to = "/admin.html"
