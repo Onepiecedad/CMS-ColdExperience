@@ -63,51 +63,86 @@
 
   function initIdentity() {
     var loginBtn = document.getElementById("loginBtn");
+    var wired = false;
 
-    function ensureOpen() {
-      try {
-        window.netlifyIdentity && window.netlifyIdentity.open("login");
-      } catch (e) {
-        /* noop */
+    function attemptWire() {
+      var identity = window.netlifyIdentity;
+      if (!identity) {
+        setTimeout(attemptWire, 50);
+        return;
       }
-    }
 
-    function wireIdentity(identity) {
-      if (!identity) return;
-
-      identity.on("init", function (user) {
-        if (!user) ensureOpen();
-      });
-
-      ["login", "logout"].forEach(function (evt) {
-        identity.on(evt, function () {
-          window.location.href = "/admin/";
-        });
-      });
+      if (wired) return;
+      wired = true;
 
       if (loginBtn) {
         loginBtn.addEventListener("click", function (e) {
           e.preventDefault();
-          ensureOpen();
+          openLogin(identity);
         });
       }
 
-      setTimeout(function () {
-        if (!identity.currentUser()) ensureOpen();
-      }, 200);
-    }
-
-    if (window.netlifyIdentity) {
-      wireIdentity(window.netlifyIdentity);
-    } else {
-      window.addEventListener("load", function () {
-        if (window.netlifyIdentity) {
-          wireIdentity(window.netlifyIdentity);
-        } else if (loginBtn) {
-          loginBtn.textContent = "Netlify Identity failed to load";
-          loginBtn.style.opacity = "0.6";
+      identity.on("init", function (user) {
+        if (user) {
+          markCmsReady();
+          ensureCmsRoute();
+        } else {
+          openLogin(identity);
         }
       });
+
+      identity.on("login", function () {
+        markCmsReady();
+        identity.close();
+        ensureCmsRoute(true);
+      });
+
+      identity.on("logout", function () {
+        document.body.classList.remove("cms-ready");
+        identity.close();
+        window.location.replace("/admin/");
+      });
+
+      if (identity.currentUser()) {
+        markCmsReady();
+        ensureCmsRoute();
+      }
+
+      if (typeof identity.init === "function") {
+        identity.init();
+      }
+    }
+
+    attemptWire();
+
+    function openLogin(identity) {
+      try {
+        identity.open("login");
+      } catch (e) {
+        /* no-op */
+      }
+    }
+
+    function ensureCmsRoute(force) {
+      var hash = window.location.hash || "";
+      var onRecover = hash.indexOf("#/recover-password") === 0;
+
+      if (!force && onRecover) return;
+
+      if (hash !== "#/" || force) {
+        window.location.replace("/admin/#/");
+      }
+    }
+
+    function markCmsReady() {
+      document.body.classList.add("cms-ready");
+      try {
+        if (window.netlifyIdentity && typeof window.netlifyIdentity.close === "function") {
+          window.netlifyIdentity.close();
+        }
+      } catch (e) {
+        /* no-op */
+      }
     }
   }
 })();

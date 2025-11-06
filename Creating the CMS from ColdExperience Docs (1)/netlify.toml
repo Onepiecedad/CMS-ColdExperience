@@ -4,6 +4,16 @@
   publish = "public"
 
 [[redirects]]
+  from = "/config.yml"
+  to = "/config.yml"
+  status = 200
+
+[[redirects]]
+  from = "/media/*"
+  to = "/media/:splat"
+  status = 200
+
+[[redirects]]
   from = "/*"
   to = "/admin.html"
   status = 200
